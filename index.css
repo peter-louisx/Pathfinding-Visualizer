@@ -1,0 +1,249 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+:root {
+  --background-gradient: linear-gradient(30deg, #f39c12 30%, #f1c40f);
+  --gray: #34495e;
+  --darkgray: #2c3e50;
+}
+
+body {
+  min-height: 100vh;
+}
+.row {
+  display: flex;
+}
+
+select {
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: #fff;
+  font-size: 19x;
+  /* background-color: var(--darkgray); */
+  background-color: rgb(87, 160, 69);
+  background-image: none;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  width: 10em;
+  height: 2em;
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em;
+  /* background-color: #34495e; */
+  background-color: rgb(208, 255, 0);
+  transition: 0.25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  /* color: #f39c12; */
+  color: rgb(0, 255, 13);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  height: 4rem;
+  background-color: rgb(110, 250, 208);
+  box-shadow: 0px 5px 5px #aaaaaa;
+}
+
+.controls {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.node {
+  width: 28px;
+  height: 28px;
+  border: 1px solid black;
+}
+
+.board {
+  margin: auto;
+  width: 90%;
+}
+
+.title {
+  margin: 0px 20px 0px 20px;
+}
+
+.start {
+  background-color: yellow;
+}
+
+.start.selected {
+  transform: scale(1.2);
+  background-color: rgb(240, 255, 106);
+  border: 1px solid rgb(241, 255, 117);
+}
+
+.start:hover {
+  transform: scale(1.2);
+  background-color: rgb(240, 255, 106);
+  border: 1px solid rgb(241, 255, 117);
+  transition: 0.5s;
+}
+
+.target {
+  background-color: red;
+}
+
+.target.selected {
+  transform: scale(1.2);
+  background-color: rgb(126, 21, 21);
+  border: 1px solid rgb(255, 98, 98);
+}
+.target:hover {
+  transform: scale(1.2);
+  background-color: rgb(126, 21, 21);
+  border: 1px solid rgb(255, 98, 98);
+  transition: 0.5s;
+}
+
+.path {
+  border: 1px solid rgb(101, 248, 133);
+  animation-name: pathAnimation;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.visited {
+  border: 1px solid rgb(0, 247, 255);
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.picked {
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+
+.wall {
+  animation-name: wallAnimation;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+button {
+  display: inline-block;
+  padding: 0.4em 1.3em;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid rgb(255, 255, 255);
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: rgb(87, 160, 69);
+  text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
+@keyframes wallAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgb(12, 53, 71);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(12, 53, 71);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(12, 53, 71);
+  }
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: rgba(17, 104, 217, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(0, 217, 159, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+@keyframes pathAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: rgba(54, 180, 121, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 255, 157, 0.75);
+  }
+}
